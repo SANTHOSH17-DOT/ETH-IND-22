@@ -1,5 +1,5 @@
 /** @format */
 
-import Newupload from "./Upload";
+import NewUpload from "./upload";
 
-export default Newupload;
+export default NewUpload;

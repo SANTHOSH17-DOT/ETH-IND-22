@@ -5,7 +5,7 @@
 // import * as PushAPI from "@pushprotocol/restapi";
 import styles from "./style.module.css";
 import React, { useState } from "react";
-function Newupload({ onOpen }) {
+function NewUpload({ onOpen }) {
   return (
     <>
       <button onClick={onOpen} className={styles.uploadBtn}>
@@ -15,4 +15,4 @@ function Newupload({ onOpen }) {
   );
 }
 
-export default Newupload;
+export default NewUpload;

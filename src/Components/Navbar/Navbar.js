@@ -3,7 +3,7 @@
 import React, { useCallback, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import styles from "./style.module.css";
-import NewUpload from "../Uploads/Upload";
+
 import { useAccount } from "wagmi";
 // import Logo from "assets/Storage.png";
 import {
@@ -19,6 +19,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import { deployEncrypted } from "../../helpers/lightHouseStorage";
+import NewUpload from "../Uploads";
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { isConnected } = useAccount();
@@ -26,9 +27,9 @@ const Navbar = () => {
     <>
       <div className={styles.nav}>
         {/* <Image src="assets/Storage.png" /> */}
-        <div style={{display:"flex",alignItems:"center"}}>
-        <img src="assets/Storage.png" width={44} />
-        <b>GrayBox</b>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <img src="assets/Storage.png" width={44} />
+          <b>GrayBox</b>
         </div>
         {isConnected ? <NewUpload onOpen={onOpen} /> : ""}
 

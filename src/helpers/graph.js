@@ -8,8 +8,9 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-export const getFilesQuery = async(address) => {
-  address = address.toString();
+export const getFilesQuery = (address) => {
+  address = address.toString().toLowerCase();
+
   const query = `
         query {
             files(where: { user:"${address}" }) {
@@ -25,5 +26,7 @@ export const getFilesQuery = async(address) => {
             }
         }
     `;
-  return query;
+  return client.query({
+    query: gql(query),
+  });
 };
