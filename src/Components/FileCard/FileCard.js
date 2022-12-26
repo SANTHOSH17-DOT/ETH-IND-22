@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { getFileUrl } from "../../helpers/lightHouseStorage";
 import styles from "./style.module.css";
