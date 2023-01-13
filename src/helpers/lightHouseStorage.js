@@ -4,7 +4,7 @@ import { providers } from "ethers";
 import lighthouse from "@lighthouse-web3/sdk";
 import { AddFile } from "../web3/File/AddFile";
 // signer to sign in
-export const sign_message = async() => {
+export const sign_message = async () => {
   const provider = new providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const address = await signer.getAddress();
@@ -20,7 +20,7 @@ export const sign_message = async() => {
   };
 };
 //For encryption purpose
-export const encryptionSignature = async() => {
+export const encryptionSignature = async () => {
   const provider = new providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const address = await signer.getAddress();
@@ -30,7 +30,7 @@ export const encryptionSignature = async() => {
   return signedMessage;
 };
 
-export const deployEncrypted = async(e) => {
+export const deployEncrypted = async (e) => {
   // Sign message for authentication
   const signingResponse = await sign_message();
 
@@ -68,7 +68,7 @@ export const deployEncrypted = async(e) => {
 
   //   console.log('Visit at https://ipfs.io/ipfs/' + output.data.Hash);
 };
-const sign_auth_message = async() => {
+const sign_auth_message = async () => {
   const provider = new providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const publicKey = (await signer.getAddress()).toLowerCase();
@@ -77,8 +77,8 @@ const sign_auth_message = async() => {
   const signed_message = await signer.signMessage(messageRequested);
   return signed_message;
 };
-export const getFileUrl = async(cid, publicKey) => {
-  const signed_message = await sign_auth_message();
+export const getFileUrl = async (cid) => {
+  const { publicKey, signedMessage } = await sign_auth_message();
 
   /*
       fetchEncryptionKey(cid, publicKey, signedMessage)
@@ -90,7 +90,7 @@ export const getFileUrl = async(cid, publicKey) => {
   const keyObject = await lighthouse.fetchEncryptionKey(
     cid,
     publicKey,
-    signed_message
+    signedMessage
   );
 
   // Decrypt file
@@ -105,7 +105,8 @@ export const getFileUrl = async(cid, publicKey) => {
   const decrypted = await lighthouse.decryptFile(cid, keyObject.data.key);
   console.log(decrypted);
   var urlCreator = window.URL || window.webkitURL;
-  var imageUrl = urlCreator.createObjectURL(decrypted.blob);
+  var imageUrl = urlCreator.createObjectURL(decrypted);
+  console.log(imageUrl);
   return imageUrl;
   /*
       Response: blob

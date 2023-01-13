@@ -9,9 +9,8 @@ import styles from "./style.module.css";
 
 export const FileCard = ({ name, cid }) => {
   const [url, setUrl] = useState("");
-  const { address } = useAccount();
   useEffect(() => {
-    getFileUrl(cid, address).then((url) => {
+    getFileUrl(cid).then((url) => {
       setUrl(url);
     });
   }, []);
